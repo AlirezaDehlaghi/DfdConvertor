@@ -87,7 +87,7 @@ namespace DFDAnalyzer
                 var flow =  flowitem.Value;
                 var source = this.ProcessList[flow.SourceID];
                 var destination = this.ProcessList[flow.DestinationID];
-                writer.Write(string.Format("{0}, {1},\t {2},\t {3},\t {4},\t {5}\n", counter, flow.Name.Replace(',', '|'), source.Name, source.TypeID, destination.Name, destination.TypeID));
+                writer.Write(string.Format("{0},{1},{2},{3},{4},{5}\n", counter, flow.Name.Replace(',',';'), source.Name, source.TypeID, destination.Name, destination.TypeID));
 
             }
             writer.Flush();

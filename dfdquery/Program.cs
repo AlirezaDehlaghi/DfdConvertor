@@ -1,14 +1,16 @@
 ﻿using DFDAnalyzer;
+using DFDAnalyzer.Vector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace dfdquery
 {
-	internal class Program
+	public class Program
 	{
 
-		static void Main(string[] args)
+		public static void Main(string[] args)
 		{
 			if (args.Length == 0)
 			{
@@ -33,7 +35,8 @@ namespace dfdquery
 		{
 			[nameof(Export)] = Export,
 			[nameof(Help)] = Help,
-			[nameof(Convert)] = Convert
+			[nameof(Convert)] = Convert,
+			[nameof(Threat)] = Threat
 		};
 		
 
@@ -55,7 +58,7 @@ namespace dfdquery
 			}
 			else
 			{
-				Console.WriteLine("Invalid args. Expected format: Export <input_file> <output_file>");
+				Console.WriteLine("Invalid args. Expected format: Convert <input_file> <output_file>");
 			}
 		}
 
@@ -70,6 +73,23 @@ namespace dfdquery
 			else
 			{
 				Console.WriteLine("Invalid args. Expected format: Export <input_file> <output_file>");
+			}
+		}
+
+		static void Threat(string[] args)
+		{
+			if (args.Length == 3)
+			{
+				Graph graph = new Graph(args[0]);
+				graph.ExportVectors(args[1]);
+                graph.ExportPaths(args[2]);
+				
+
+
+			}
+			else
+			{
+				Console.WriteLine("Invalid args. Expected format: Threats <input_file> <vector_output_file> <expanded_vector_output_file ");
 			}
 		}
 

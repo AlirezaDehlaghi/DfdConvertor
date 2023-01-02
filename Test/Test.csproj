@@ -21,6 +21,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DFDAnalyzer\DFDAnalyzer.csproj" />
+    <ProjectReference Include="..\dfdquery\dfdquery.csproj" />
   </ItemGroup>
 
 </Project>

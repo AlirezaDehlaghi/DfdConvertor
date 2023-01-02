@@ -1,42 +1,19 @@
 using DFDAnalyzer;
 using System.IO;
 using Xunit;
+using dfdquery;
 
 namespace Test
 {
     public class UnitTest1
     {
-        public string filePath { get {
-                return Path.Combine(
-    Helper.TryGetSolutionDirectoryInfo().FullName,
-    "RemoteControlHxDFDV10.tm7");
-            } }
-
-        public string saveFilePath{
-            get{
-                return Path.Combine(
-    Helper.TryGetSolutionDirectoryInfo().FullName,
-    "Flows.csv");
-            } 
-        }
-
-        public string RebecaFilePath
-        {
-            get
-            {
-                return Path.Combine(
-    Helper.TryGetSolutionDirectoryInfo().FullName,
-    "RemoteControllerHx_V9new.rebeca");
-            }
-        }
-
-
 
         [Fact]
         public void Test1()
         {
 
-            DFDDiagram diagram = new DFDDiagram(filePath);
+
+            DFDDiagram diagram = new DFDDiagram(Helper.PathDfd);
             var x = diagram.ProcessList;
             Assert.True(true);
 
@@ -45,17 +22,26 @@ namespace Test
         [Fact]
         public void Test_ExportFlows() 
         {
-            DFDDiagram diagram = new DFDDiagram(filePath);
-            diagram.ExportFlows(this.saveFilePath);
-            Assert.True(true);
+            Program.Main(new string[] { "Export", Helper.PathDfd, Helper.OutputFileFlows });
+
         }
 
         [Fact]
         public void Test_ExportRebeca()
         {
-            DFDDiagram diagram = new DFDDiagram(filePath);
-            RebecaCode code = new RebecaCode(diagram);
-            code.ExportToFile(this.RebecaFilePath);
+            Program.Main(new string[] { "Convert", Helper.PathDfd, Helper.OutputFileFlows });
+            //DFDDiagram diagram = new DFDDiagram(filePath);
+            //RebecaCode code = new RebecaCode(diagram);
+            //code.ExportToFile(this.RebecaFilePath);
         }
+
+
+        [Fact]
+        public void Test_ExportThreats()
+        {
+            Program.Main(new string[] { "Threat", Helper.PathAttackList, Helper.OutputFileThreats, Helper.OutputFileExpandedThreats });
+        }
+
+
     }
 }
